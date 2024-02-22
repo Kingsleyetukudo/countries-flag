@@ -1,23 +1,33 @@
-import { Search } from "react-ionicons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PropTypes from "prop-types";
 
-function SearchFilter() {
+function SearchFilter({ darkMode }) {
   return (
     <div className="flex justify-between px-12 pt-10">
-      <div className="shadow-md flex items-center gap-4 py-3 px-5">
-        <span className="text-lmbg">
-          <Search size="small" />
-        </span>
+      <div
+        className={
+          darkMode
+            ? " flex items-center gap-4 shadow-md px-5 py-3 font-newFont bg-dme text-lmtne w-1/3 rounded-md"
+            : "flex items-center gap-4 shadow-md px-5 py-3 font-newFont bg-lmtne text-lmt w-1/3 rounded-md"
+        }
+      >
+        <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
+
         <input
           type="text"
           placeholder="Search for a country"
-          className="outline-none bg-transparent"
+          className="outline-none bg-transparent w-full"
         />
       </div>
 
-      <select className="shadow-md w-60 p-2 outline-none bg-transparent">
-        <option className="text-white bg-black hover:bg-red">
-          Filter by Region
-        </option>
+      <select
+        className={
+          darkMode
+            ? " shadow-md w-60 p-2 outline-none font-newFont bg-dme text-lmtne  rounded-md border-none"
+            : " shadow-md p-2 outline-none font-newFont bg-lmtne text-lmt w-60 rounded-md"
+        }
+      >
+        <option>Filter by Region</option>
         <option value="africa" className="bg-transparent">
           Africa
         </option>
@@ -29,5 +39,9 @@ function SearchFilter() {
     </div>
   );
 }
+
+SearchFilter.propTypes = {
+  darkMode: PropTypes.bool.isRequired,
+};
 
 export default SearchFilter;

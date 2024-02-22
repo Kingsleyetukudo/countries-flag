@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Moon } from "react-ionicons";
+import PropTypes from "prop-types";
 
 function NavBar({ darkMode, toggleDarkMode }) {
   return (
@@ -33,5 +33,10 @@ function NavBar({ darkMode, toggleDarkMode }) {
     </div>
   );
 }
+
+NavBar.propTypes = {
+  darkMode: PropTypes.bool.isRequired,
+  toggleDarkMode: PropTypes.func.isRequired,
+};
 
 export default NavBar;

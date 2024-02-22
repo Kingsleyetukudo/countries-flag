@@ -38,7 +38,7 @@ function FlagPage({ darkMode }) {
   }, []);
   return (
     <div>
-      <SearchFilter />
+      <SearchFilter darkMode={darkMode} />
       <div className="grid grid-cols-4 gap-12 px-12 py-10">
         {data.map((country, index) => (
           <div

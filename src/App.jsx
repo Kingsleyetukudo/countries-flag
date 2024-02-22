@@ -1,5 +1,6 @@
 import NavBar from "./components/Navbar";
 import FlagPage from "./components/FlagPage";
+import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -23,7 +24,9 @@ function App() {
   return (
     <>
       <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <FlagPage darkMode={darkMode} />
+      <Routes>
+        <Route path="/" element={<FlagPage darkMode={darkMode} />} />
+      </Routes>
     </>
   );
 }
