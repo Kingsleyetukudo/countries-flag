@@ -46,12 +46,12 @@ function FlagPage({ darkMode }) {
   return (
     <div>
       {/* <SearchFilter darkMode={darkMode} /> */}
-      <div className="flex justify-between px-12 pt-10">
+      <div className="flex justify-between sm:flex-col gap-8 px-12 sm:px-4 pt-10">
         <div
           className={
             darkMode
-              ? " flex items-center gap-4 shadow-md px-5 py-3 font-newFont bg-dme text-lmtne w-1/3 rounded-md"
-              : "flex items-center gap-4 shadow-md px-5 py-3 font-newFont bg-lmtne text-lmt w-1/3 rounded-md"
+              ? "flex items-center gap-4 shadow-md px-5 py-3 font-newFont bg-dme text-lmtne w-1/3 sm:w-full rounded-md"
+              : "flex items-center gap-4 shadow-md px-5 py-3 font-newFont bg-lmtne text-lmt w-1/3 sm:w-full rounded-md"
           }
         >
           <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
@@ -69,8 +69,8 @@ function FlagPage({ darkMode }) {
         <select
           className={
             darkMode
-              ? " shadow-md w-60 p-2 outline-none font-newFont bg-dme text-lmtne  rounded-md border-none"
-              : " shadow-md p-2 outline-none font-newFont bg-lmtne text-lmt w-60 rounded-md"
+              ? " shadow-md w-60 sm:w-fit p-2 outline-none font-newFont bg-dme text-lmtne  rounded-md border-none"
+              : " shadow-md p-2 outline-none font-newFont bg-lmtne text-lmt w-60 sm:w-fit rounded-md"
           }
           value={selectedCategory}
           onChange={handleCategoryChange}
@@ -85,7 +85,7 @@ function FlagPage({ darkMode }) {
           <option value="oceania">Oceania</option>
         </select>
       </div>
-      <div className="grid grid-cols-4 gap-12 px-12 py-10">
+      <div className="grid lg:grid-cols-4  md:grid-cols-2 sm:grid-cols-1 gap-12 px-12 py-10">
         {filteredCountries.map((country, index) => (
           <Link key={index} to={`/countryDetails/${index}`}>
             <div
@@ -102,18 +102,18 @@ function FlagPage({ darkMode }) {
                   className="object-cover h-full w-full rounded-t-md"
                 />
               </div>
-              <div className="p-10">
+              <div className="p-10 sm:p-5">
                 <h3 className="mb-5 font-bold">{country.name}</h3>
                 <p>
-                  <span className="font-semibold">Population:</span>
+                  <span className="font-semibold">Population: </span>
                   {country.population.toLocaleString()}
                 </p>
                 <p>
-                  <span className="font-semibold">Region:</span>
+                  <span className="font-semibold">Region: </span>
                   {country.region}
                 </p>
                 <p>
-                  <span className="font-semibold">Capital:</span>
+                  <span className="font-semibold">Capital: </span>
                   {country.capital}
                 </p>
               </div>

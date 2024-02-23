@@ -17,6 +17,10 @@ export default {
       boxShadow: {
         "3xl": "-1px 0px 10px 2px rgba(0,0,0,0.67);",
       },
+      screens: {
+        md: { min: "767px" },
+        sm: { max: "639px" },
+      },
     },
   },
   plugins: [],
