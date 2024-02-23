@@ -27,7 +27,10 @@ function App() {
       <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <Routes>
         <Route path="/" element={<FlagPage darkMode={darkMode} />} />
-        <Route path="/countryDetails/:id" element={<DeatilsPage />} />
+        <Route
+          path="/countryDetails/:id"
+          element={<DeatilsPage darkMode={darkMode} />}
+        />
       </Routes>
     </>
   );

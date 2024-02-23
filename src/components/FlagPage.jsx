@@ -1,47 +1,91 @@
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
-import SearchFilter from "./SearchFilter";
+// import SearchFilter from "./SearchFilter";
 import { Link } from "react-router-dom";
 
 function FlagPage({ darkMode }) {
-  const [data, setData] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [searchCountry, setSearchCountry] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchCountry(event.target.value);
+  };
+
+  const sortItems = () => {
+    const sortedItems = [...countries].sort((a, b) => {
+      const relevanceA = calculateRelevance(a);
+      const relevanceB = calculateRelevance(b);
+
+      return relevanceB - relevanceA;
+    });
+    setCountries(sortedItems);
+  };
+
+  const calculateRelevance = (item) => {
+    return item.name.toLowerCase() === searchCountry.toLowerCase() ? 1 : 0;
+  };
 
   useEffect(() => {
-    // Function to fetch the data
     const fetchData = async () => {
       try {
-        // Fetch the data using the fetch API
-        const response = await fetch("/data.json"); // Replace 'data.json' with your JSON file or API endpoint
+        const response = await fetch("/data.json");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
-        // Parse the JSON response
         const jsonData = await response.json();
-        // Set the fetched data to the state
 
-        setData(jsonData);
+        setCountries(jsonData);
         console.log(jsonData[1]);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    // Call the fetchData function
     fetchData();
-
-    // fetch("http://localhost:3000/1")
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     console.log(data.name);
-    //   });
   }, []);
   return (
     <div>
-      <SearchFilter darkMode={darkMode} />
+      {/* <SearchFilter darkMode={darkMode} /> */}
+      <div className="flex justify-between px-12 pt-10">
+        <div
+          className={
+            darkMode
+              ? " flex items-center gap-4 shadow-md px-5 py-3 font-newFont bg-dme text-lmtne w-1/3 rounded-md"
+              : "flex items-center gap-4 shadow-md px-5 py-3 font-newFont bg-lmtne text-lmt w-1/3 rounded-md"
+          }
+        >
+          <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
+
+          <input
+            type="text"
+            placeholder="Search for a country"
+            className="outline-none bg-transparent w-full"
+            value={searchCountry}
+            onChange={handleSearchChange}
+            onKeyDown={sortItems}
+          />
+        </div>
+
+        <select
+          className={
+            darkMode
+              ? " shadow-md w-60 p-2 outline-none font-newFont bg-dme text-lmtne  rounded-md border-none"
+              : " shadow-md p-2 outline-none font-newFont bg-lmtne text-lmt w-60 rounded-md"
+          }
+        >
+          <option>Filter by Region</option>
+          <option value="africa" className="bg-transparent">
+            Africa
+          </option>
+          <option value="america">America</option>
+          <option value="asia">Asia</option>
+          <option value="europe">Europe</option>
+          <option value="oceania">Oceania</option>
+        </select>
+      </div>
       <div className="grid grid-cols-4 gap-12 px-12 py-10">
-        {data.map((country, index) => (
+        {countries.map((country, index) => (
           <Link key={index} to={`/countryDetails/${index}`}>
             <div
               className={
@@ -60,21 +104,18 @@ function FlagPage({ darkMode }) {
               <div className="p-10">
                 <h3 className="mb-5 font-bold">{country.name}</h3>
                 <p>
-                  <span className="font-semibold">Population:</span>{" "}
+                  <span className="font-semibold">Population:</span>
                   {country.population}
                 </p>
                 <p>
-                  <span className="font-semibold">Region:</span>{" "}
+                  <span className="font-semibold">Region:</span>
                   {country.region}
                 </p>
                 <p>
-                  <span className="font-semibold">Capital:</span>{" "}
+                  <span className="font-semibold">Capital:</span>
                   {country.capital}
                 </p>
               </div>
-
-              {/* <h2>{country.name}</h2>
-            <p>Capital: {country.capital}</p> */}
             </div>
           </Link>
         ))}

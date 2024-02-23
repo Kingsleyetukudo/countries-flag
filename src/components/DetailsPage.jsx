@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function DeatilsPage() {
+function DeatilsPage({ darkMode }) {
   const [country, setCountry] = useState({});
   const { id } = useParams();
   useEffect(() => {
@@ -32,7 +33,11 @@ function DeatilsPage() {
     <div className="p-12 flex flex-col">
       <Link
         to="/"
-        className="rounded-md mb-12 px-8 py-2 shadow-3xl bg-lmbg w-fit"
+        className={
+          darkMode
+            ? "rounded-md mb-12 px-8 py-2 shadow-3xl bg-dme text-lmtne w-fit"
+            : "rounded-md mb-12 px-8 py-2 shadow-3xl bg-lmbg text-lmt w-fit"
+        }
       >
         <FontAwesomeIcon icon="fa-solid fa-arrow-left" /> Back
       </Link>
@@ -40,7 +45,7 @@ function DeatilsPage() {
         <div>
           <img src={country.flag} alt="" />
         </div>
-        <div>
+        <div className={darkMode ? "text-lmtne" : "text-lmt"}>
           <h1 className="text-3xl font-extrabold pb-6">{country.name}</h1>
           <div className="grid grid-cols-2">
             <div className="flex flex-col gap-2">
@@ -111,5 +116,9 @@ function DeatilsPage() {
     </div>
   );
 }
+
+DeatilsPage.propTypes = {
+  darkMode: PropTypes.bool.isRequired,
+};
 
 export default DeatilsPage;
