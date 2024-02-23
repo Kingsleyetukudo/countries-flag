@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter, faFontAwesome } from "@fortawesome/free-brands-svg-icons";
+import DeatilsPage from "./components/DetailsPage";
 
 library.add(fas, faTwitter, faFontAwesome);
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <Routes>
         <Route path="/" element={<FlagPage darkMode={darkMode} />} />
+        <Route path="/countryDetails/:id" element={<DeatilsPage />} />
       </Routes>
     </>
   );

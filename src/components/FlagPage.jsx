@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import SearchFilter from "./SearchFilter";
+import { Link } from "react-router-dom";
 
 function FlagPage({ darkMode }) {
   const [data, setData] = useState([]);
@@ -41,39 +42,41 @@ function FlagPage({ darkMode }) {
       <SearchFilter darkMode={darkMode} />
       <div className="grid grid-cols-4 gap-12 px-12 py-10">
         {data.map((country, index) => (
-          <div
-            key={index}
-            className={
-              darkMode
-                ? "grid grid-rows-2 bg-dme text-lmtne shadow-md rounded-md"
-                : "grid grid-rows-2 bg-lmtne text-lmt shadow-md rounded-md"
-            }
-          >
-            <div className=" rounded-md">
-              <img
-                src={country.flag}
-                alt=""
-                className="object-cover h-full w-full rounded-t-md"
-              />
-            </div>
-            <div className="p-10">
-              <h3 className="mb-5 font-bold">{country.name}</h3>
-              <p>
-                <span className="font-semibold">Population:</span>{" "}
-                {country.population}
-              </p>
-              <p>
-                <span className="font-semibold">Region:</span> {country.region}
-              </p>
-              <p>
-                <span className="font-semibold">Capital:</span>{" "}
-                {country.capital}
-              </p>
-            </div>
+          <Link key={index} to={`/countryDetails/${index}`}>
+            <div
+              className={
+                darkMode
+                  ? "grid grid-rows-2 bg-dme text-lmtne shadow-md rounded-md"
+                  : "grid grid-rows-2 bg-lmtne text-lmt shadow-md rounded-md"
+              }
+            >
+              <div className=" rounded-md">
+                <img
+                  src={country.flag}
+                  alt=""
+                  className="object-cover h-full w-full rounded-t-md"
+                />
+              </div>
+              <div className="p-10">
+                <h3 className="mb-5 font-bold">{country.name}</h3>
+                <p>
+                  <span className="font-semibold">Population:</span>{" "}
+                  {country.population}
+                </p>
+                <p>
+                  <span className="font-semibold">Region:</span>{" "}
+                  {country.region}
+                </p>
+                <p>
+                  <span className="font-semibold">Capital:</span>{" "}
+                  {country.capital}
+                </p>
+              </div>
 
-            {/* <h2>{country.name}</h2>
+              {/* <h2>{country.name}</h2>
             <p>Capital: {country.capital}</p> */}
-          </div>
+            </div>
+          </Link>
         ))}
       </div>
     </div>

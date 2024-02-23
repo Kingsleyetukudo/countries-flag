@@ -14,6 +14,9 @@ export default {
         dminput: "hsl(0, 0%, 52%)",
         lmtne: "hsl(0, 0%, 100%)",
       },
+      boxShadow: {
+        "3xl": "-1px 0px 10px 2px rgba(0,0,0,0.67);",
+      },
     },
   },
   plugins: [],
