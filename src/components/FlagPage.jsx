@@ -7,25 +7,24 @@ import { Link } from "react-router-dom";
 function FlagPage({ darkMode }) {
   const [countries, setCountries] = useState([]);
   const [searchCountry, setSearchCountry] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const handleSearchChange = (event) => {
     setSearchCountry(event.target.value);
   };
-
-  const sortItems = () => {
-    const sortedItems = [...countries].sort((a, b) => {
-      const relevanceA = calculateRelevance(a);
-      const relevanceB = calculateRelevance(b);
-
-      return relevanceB - relevanceA;
-    });
-    setCountries(sortedItems);
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
   };
 
-  const calculateRelevance = (item) => {
-    return item.name.toLowerCase() === searchCountry.toLowerCase() ? 1 : 0;
-  };
-
+  const filteredCountries = countries.filter((item) => {
+    const searchMatch = item.name
+      .toLowerCase()
+      .includes(searchCountry.toLowerCase());
+    const categoryMatch = selectedCategory
+      ? item.region.toLowerCase() === selectedCategory
+      : true;
+    return searchMatch && categoryMatch;
+  });
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -63,7 +62,7 @@ function FlagPage({ darkMode }) {
             className="outline-none bg-transparent w-full"
             value={searchCountry}
             onChange={handleSearchChange}
-            onKeyDown={sortItems}
+            // onKeyDown={sortItems}
           />
         </div>
 
@@ -73,19 +72,21 @@ function FlagPage({ darkMode }) {
               ? " shadow-md w-60 p-2 outline-none font-newFont bg-dme text-lmtne  rounded-md border-none"
               : " shadow-md p-2 outline-none font-newFont bg-lmtne text-lmt w-60 rounded-md"
           }
+          value={selectedCategory}
+          onChange={handleCategoryChange}
         >
-          <option>Filter by Region</option>
+          <option value="">Filter by Region</option>
           <option value="africa" className="bg-transparent">
             Africa
           </option>
-          <option value="america">America</option>
+          <option value="americas">America</option>
           <option value="asia">Asia</option>
           <option value="europe">Europe</option>
           <option value="oceania">Oceania</option>
         </select>
       </div>
       <div className="grid grid-cols-4 gap-12 px-12 py-10">
-        {countries.map((country, index) => (
+        {filteredCountries.map((country, index) => (
           <Link key={index} to={`/countryDetails/${index}`}>
             <div
               className={
@@ -105,7 +106,7 @@ function FlagPage({ darkMode }) {
                 <h3 className="mb-5 font-bold">{country.name}</h3>
                 <p>
                   <span className="font-semibold">Population:</span>
-                  {country.population}
+                  {country.population.toLocaleString()}
                 </p>
                 <p>
                   <span className="font-semibold">Region:</span>
