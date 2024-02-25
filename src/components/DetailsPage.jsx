@@ -7,17 +7,13 @@ function DeatilsPage({ darkMode }) {
   const [country, setCountry] = useState({});
   const { id } = useParams();
   useEffect(() => {
-    // Function to fetch the data
     const fetchData = async () => {
       try {
-        // Fetch the data using the fetch API
-        const response = await fetch(`http://localhost:3000/${id}`); // Replace 'data.json' with your JSON file or API endpoint
+        const response = await fetch(`http://localhost:3000/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
-        // Parse the JSON response
         const jsonData = await response.json();
-        // Set the fetched data to the state
 
         setCountry(jsonData);
         console.log(jsonData);
@@ -26,11 +22,10 @@ function DeatilsPage({ darkMode }) {
       }
     };
 
-    // Call the fetchData function
     fetchData();
-  }, []);
+  }, [id]);
   return (
-    <div className="p-12 flex flex-col">
+    <div className="p-12 sm:px-6 flex flex-col">
       <Link
         to="/"
         className={
@@ -41,13 +36,13 @@ function DeatilsPage({ darkMode }) {
       >
         <FontAwesomeIcon icon="fa-solid fa-arrow-left" /> Back
       </Link>
-      <div className=" grid grid-cols-2 gap-20 items-center">
+      <div className=" grid lg:grid-cols-2 sm:grid-cols-1 gap-20 sm:gap-6 items-center">
         <div>
           <img src={country.flag} alt="" />
         </div>
         <div className={darkMode ? "text-lmtne" : "text-lmt"}>
-          <h1 className="text-3xl font-extrabold pb-6">{country.name}</h1>
-          <div className="grid grid-cols-2">
+          <h1 className="text-3xl font-extrabold pb-6 sm:p">{country.name}</h1>
+          <div className="grid lg:grid-cols-2 gap-8">
             <div className="flex flex-col gap-2">
               <p>
                 <span className="font-semibold">Native Name: </span>
@@ -99,13 +94,22 @@ function DeatilsPage({ darkMode }) {
                   ))}
               </p>
             </div>
-            <div>
-              <p className="font-semibold pt-12">Border Countries:</p>
+            <div className="flex sm:flex-col mt-12 gap-2">
+              <p className="font-semibold">Border Countries:</p>
               <div className="w-1/3 flex justify-between gap-2">
                 {country.borders &&
                   country.borders.map((border, index) => (
                     <div key={index}>
-                      <span>{border}</span>
+                      <Link
+                        to={`/countryDetails/${index}`}
+                        className={
+                          darkMode
+                            ? "text-lmtne shadow-md px-2 py-1 rounded-md bg-dme"
+                            : "text-lmt shadow-md px-2 py-1 rounded-md bg-lmtne"
+                        }
+                      >
+                        {border}
+                      </Link>
                     </div>
                   ))}
               </div>

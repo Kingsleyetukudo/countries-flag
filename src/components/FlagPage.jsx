@@ -26,6 +26,11 @@ function FlagPage({ darkMode }) {
     return searchMatch && categoryMatch;
   });
   useEffect(() => {
+    localStorage.setItem("myData", filteredCountries);
+    console.log(filteredCountries);
+  }, [filteredCountries]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("/data.json");
