@@ -15,7 +15,7 @@ function NavBar({ darkMode, toggleDarkMode }) {
           className={
             darkMode
               ? "text-xl sm:text-base sm:font-medium font-extrabold"
-              : "text-lg sm:text-base sm:font-medium font-extrabold"
+              : "text-xl sm:text-base sm:font-medium font-extrabold"
           }
         >
           Where in the world?

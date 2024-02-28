@@ -8,6 +8,7 @@ function FlagPage({ darkMode }) {
   const [countries, setCountries] = useState([]);
   const [searchCountry, setSearchCountry] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  // const [newArrayFiltered, setNewArrayFiltered] = useState([]);
 
   const handleSearchChange = (event) => {
     setSearchCountry(event.target.value);
@@ -26,21 +27,23 @@ function FlagPage({ darkMode }) {
     return searchMatch && categoryMatch;
   });
   useEffect(() => {
-    localStorage.setItem("myData", filteredCountries);
-    console.log(filteredCountries);
+    // localStorage.setItem("myData", filteredCountries);
+    // console.log(filteredCountries);
+    // setNewArrayFiltered(filteredCountries)
+    // console.log(newArrayFiltered)
   }, [filteredCountries]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/data.json");
+        const response = await fetch("http://localhost:3000/countries");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
         const jsonData = await response.json();
 
         setCountries(jsonData);
-        console.log(jsonData[1]);
+        console.log(countries);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -91,20 +94,20 @@ function FlagPage({ darkMode }) {
         </select>
       </div>
       <div className="grid lg:grid-cols-4  md:grid-cols-2 sm:grid-cols-1 gap-12 px-12 py-10">
-        {filteredCountries.map((country, index) => (
-          <Link key={index} to={`/countryDetails/${index}`}>
+        {filteredCountries.map((country) => (
+          <Link key={country.id} to={`/countryDetails/${country.id}`}>
             <div
               className={
                 darkMode
-                  ? "grid grid-rows-2 bg-dme text-lmtne shadow-md rounded-md"
-                  : "grid grid-rows-2 bg-lmtne text-lmt shadow-md rounded-md"
+                  ? "flex flex-col bg-dme text-lmtne shadow-md rounded-md"
+                  : "flex flex-col bg-lmtne text-lmt shadow-md rounded-md"
               }
             >
-              <div className=" rounded-md">
+              <div className=" rounded-t-md">
                 <img
                   src={country.flag}
                   alt=""
-                  className="object-cover h-full w-full rounded-t-md"
+                  className="object-cover h-48 w-96 rounded-t-md"
                 />
               </div>
               <div className="p-10 sm:p-5">
