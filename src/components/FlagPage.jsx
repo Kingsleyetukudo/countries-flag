@@ -106,7 +106,7 @@ function FlagPage({ darkMode }) {
               <div className=" rounded-t-md">
                 <img
                   src={country.flag}
-                  alt=""
+                  alt={country.name}
                   className="object-cover h-48 w-96 rounded-t-md"
                 />
               </div>

@@ -58,7 +58,11 @@ function DeatilsPage({ darkMode }) {
       </Link>
       <div className=" grid lg:grid-cols-2 sm:grid-cols-1 gap-20 sm:gap-6 items-center">
         <div className="w-full">
-          <img src={country.flag && country.flag} alt="" className="w-full" />
+          <img
+            src={country.flag && country.flag}
+            alt={country.name}
+            className="w-full"
+          />
         </div>
         <div
           className={darkMode ? "text-lmtne sm:w-full" : "text-lmt sm:w-full"}
