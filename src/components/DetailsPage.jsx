@@ -11,7 +11,7 @@ function DeatilsPage({ darkMode }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/countries/${id}`);
+        const response = await fetch(`/.netlify/functions/getCountries${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -29,7 +29,7 @@ function DeatilsPage({ darkMode }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/countries");
+        const response = await fetch("/.netlify/functions/getCountries");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
