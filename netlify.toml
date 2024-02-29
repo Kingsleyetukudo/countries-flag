@@ -1,2 +1,3 @@
 [build]
   command = "npm run json-server & npm run build"
+  functions = "lambda" 
