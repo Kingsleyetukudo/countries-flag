@@ -26,12 +26,6 @@ function FlagPage({ darkMode }) {
       : true;
     return searchMatch && categoryMatch;
   });
-  useEffect(() => {
-    // localStorage.setItem("myData", filteredCountries);
-    // console.log(filteredCountries);
-    // setNewArrayFiltered(filteredCountries)
-    // console.log(newArrayFiltered)
-  }, [filteredCountries]);
 
   useEffect(() => {
     const fetchData = async () => {
