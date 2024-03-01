@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 function FlagPage({ darkMode }) {
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState(null);
   const [searchCountry, setSearchCountry] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   // const [newArrayFiltered, setNewArrayFiltered] = useState([]);
