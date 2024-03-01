@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 function FlagPage({ darkMode }) {
-  const [countries, setCountries] = useState(null);
+  const [countries, setCountries] = useState([]);
   const [searchCountry, setSearchCountry] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   // const [newArrayFiltered, setNewArrayFiltered] = useState([]);
@@ -44,7 +44,7 @@ function FlagPage({ darkMode }) {
     };
 
     fetchData();
-  }, [setCountries, countries]);
+  }, []);
   return (
     <div>
       {/* <SearchFilter darkMode={darkMode} /> */}
@@ -88,7 +88,7 @@ function FlagPage({ darkMode }) {
         </select>
       </div>
       <div className="grid lg:grid-cols-4  md:grid-cols-2 sm:grid-cols-1 gap-12 px-12 py-10">
-        {filteredCountries.map((country) => (
+        {countries.map((country) => (
           <Link key={country.id} to={`/countryDetails/${country.id}`}>
             <div
               className={
