@@ -44,7 +44,7 @@ function FlagPage({ darkMode }) {
     };
 
     fetchData();
-  }, []);
+  }, [setCountries, countries]);
   return (
     <div>
       {/* <SearchFilter darkMode={darkMode} /> */}
