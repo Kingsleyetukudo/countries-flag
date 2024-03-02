@@ -17,15 +17,18 @@ function FlagPage({ darkMode }) {
     setSelectedCategory(event.target.value);
   };
 
-  const filteredCountries = countries.filter((item) => {
-    const searchMatch = item.name
-      .toLowerCase()
-      .includes(searchCountry.toLowerCase());
-    const categoryMatch = selectedCategory
-      ? item.region.toLowerCase() === selectedCategory
-      : true;
-    return searchMatch && categoryMatch;
-  });
+  const filteredCountries =
+    countries != null
+      ? countries.filter((item) => {
+          const searchMatch = item.name
+            .toLowerCase()
+            .includes(searchCountry.toLowerCase());
+          const categoryMatch = selectedCategory
+            ? item.region.toLowerCase() === selectedCategory
+            : true;
+          return searchMatch && categoryMatch;
+        })
+      : "Loading";
 
   useEffect(() => {
     const fetchData = async () => {
