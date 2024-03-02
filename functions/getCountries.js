@@ -17075,7 +17075,8 @@ exports.handler = async (event, context) => {
     },
   ];
 
-  const { id } = event.queryStringParameters;
+  // const { id } = event.queryStringParameters;
+  const { id } = event.path.split("/").pop();
 
   if (id) {
     // Find country by ID
