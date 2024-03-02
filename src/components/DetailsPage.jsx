@@ -11,7 +11,7 @@ function DeatilsPage({ darkMode }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`/.netlify/functions/getCountries${id}`);
+        const response = await fetch(`/.netlify/functions/getCountries/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
