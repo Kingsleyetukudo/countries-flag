@@ -17075,8 +17075,28 @@ exports.handler = async (event, context) => {
     },
   ];
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(countries),
-  };
+  const pathParts = event.path.split("/");
+  const id = pathParts[pathParts.length - 1]; // Extract ID from the last part of the path
+
+  if (id) {
+    // Find country by ID
+    const country = countries.find((country) => country.id === id);
+
+    if (!country) {
+      return {
+        statusCode: 404,
+        body: JSON.stringify({ message: "Country not found" }),
+      };
+    }
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(country),
+    };
+  } else {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: "No ID provided in request" }),
+    };
+  }
 };
