@@ -1,5 +1,4 @@
 exports.handler = async (event, context) => {
-  // Assuming your country data is stored in the `countries` array
   const countries = [
     {
       id: "1",
@@ -17076,7 +17075,7 @@ exports.handler = async (event, context) => {
   ];
 
   const pathParts = event.path.split("/");
-  const id = pathParts[pathParts.length - 1]; // Extract ID from the last part of the path
+  const id = pathParts[pathParts.length - 1];
 
   if (id) {
     // Find country by ID
