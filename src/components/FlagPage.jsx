@@ -88,40 +88,41 @@ function FlagPage({ darkMode }) {
         </select>
       </div>
       <div className="grid lg:grid-cols-4  md:grid-cols-2 sm:grid-cols-1 gap-12 px-12 py-10">
-        {countries.map((country) => (
-          <Link key={country.id} to={`/countryDetails/${country.id}`}>
-            <div
-              className={
-                darkMode
-                  ? "flex flex-col bg-dme text-lmtne shadow-md rounded-md"
-                  : "flex flex-col bg-lmtne text-lmt shadow-md rounded-md"
-              }
-            >
-              <div className=" rounded-t-md">
-                <img
-                  src={country.flag}
-                  alt={country.name}
-                  className="object-cover h-48 w-96 rounded-t-md"
-                />
+        {filteredCountries &&
+          filteredCountries.map((country) => (
+            <Link key={country.id} to={`/countryDetails/${country.id}`}>
+              <div
+                className={
+                  darkMode
+                    ? "flex flex-col bg-dme text-lmtne shadow-md rounded-md"
+                    : "flex flex-col bg-lmtne text-lmt shadow-md rounded-md"
+                }
+              >
+                <div className=" rounded-t-md">
+                  <img
+                    src={country.flag}
+                    alt={country.name}
+                    className="object-cover h-48 w-96 rounded-t-md"
+                  />
+                </div>
+                <div className="p-10 sm:p-5">
+                  <h3 className="mb-5 font-bold">{country.name}</h3>
+                  <p>
+                    <span className="font-semibold">Population: </span>
+                    {country.population.toLocaleString()}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Region: </span>
+                    {country.region}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Capital: </span>
+                    {country.capital}
+                  </p>
+                </div>
               </div>
-              <div className="p-10 sm:p-5">
-                <h3 className="mb-5 font-bold">{country.name}</h3>
-                <p>
-                  <span className="font-semibold">Population: </span>
-                  {country.population.toLocaleString()}
-                </p>
-                <p>
-                  <span className="font-semibold">Region: </span>
-                  {country.region}
-                </p>
-                <p>
-                  <span className="font-semibold">Capital: </span>
-                  {country.capital}
-                </p>
-              </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
       </div>
     </div>
   );
