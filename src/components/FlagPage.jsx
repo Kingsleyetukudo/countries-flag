@@ -19,7 +19,7 @@ function FlagPage({ darkMode }) {
   };
 
   const filteredCountries =
-    countries != null
+    Array.isArray(countries) && countries.length > 0
       ? countries.filter((item) => {
           const searchMatch = item.name
             .toLowerCase()
