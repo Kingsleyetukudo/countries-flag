@@ -18,6 +18,7 @@ function DeatilsPage({ darkMode }) {
         const jsonData = await response.json();
 
         setCountry(jsonData);
+        console.log(jsonData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

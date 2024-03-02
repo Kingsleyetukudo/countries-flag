@@ -42,7 +42,7 @@ function FlagPage({ darkMode }) {
 
         setCountries(jsonData.countries);
         setLoading(false);
-        console.log(jsonData.countries);
+        // console.log(jsonData.countries);
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
