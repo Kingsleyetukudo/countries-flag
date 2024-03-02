@@ -40,7 +40,7 @@ function FlagPage({ darkMode }) {
         }
         const jsonData = await response.json();
 
-        setCountries(jsonData.countries);
+        setCountries(jsonData);
         setLoading(false);
         // console.log(jsonData.countries);
       } catch (error) {
