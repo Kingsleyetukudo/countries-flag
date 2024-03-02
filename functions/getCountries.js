@@ -17075,28 +17075,34 @@ exports.handler = async (event, context) => {
     },
   ];
 
-  // const { id } = event.queryStringParameters;
-  const { id } = event.path.split("/").pop();
+  const pathParts = event.path.split("/");
+  const id = pathParts[pathParts.length - 1]; // Extract ID from the last part of the path
+
+  console.log("Received request for country ID:", id);
 
   if (id) {
     // Find country by ID
     const country = countries.find((country) => country.id === id);
 
     if (!country) {
+      console.log("Country not found for ID:", id);
       return {
         statusCode: 404,
         body: JSON.stringify({ message: "Country not found" }),
       };
     }
 
+    console.log("Found country for ID:", id, country);
+
     return {
       statusCode: 200,
       body: JSON.stringify(country),
     };
   } else {
+    console.log("No ID provided in request");
     return {
-      statusCode: 200,
-      body: JSON.stringify({ countries }),
+      statusCode: 400,
+      body: JSON.stringify({ message: "No ID provided in request" }),
     };
   }
 };
