@@ -40,9 +40,9 @@ function FlagPage({ darkMode }) {
         }
         const jsonData = await response.json();
 
-        setCountries(jsonData);
+        setCountries(jsonData.countries);
         setLoading(false);
-        console.log(jsonData);
+        console.log(jsonData.countries);
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
