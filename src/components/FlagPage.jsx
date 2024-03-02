@@ -8,6 +8,7 @@ function FlagPage({ darkMode }) {
   const [countries, setCountries] = useState([]);
   const [searchCountry, setSearchCountry] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [loading, setLoading] = useState(true);
   // const [newArrayFiltered, setNewArrayFiltered] = useState([]);
 
   const handleSearchChange = (event) => {
@@ -28,7 +29,7 @@ function FlagPage({ darkMode }) {
             : true;
           return searchMatch && categoryMatch;
         })
-      : "Loading";
+      : [];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,17 +41,20 @@ function FlagPage({ darkMode }) {
         const jsonData = await response.json();
 
         setCountries(jsonData);
+        setLoading(false);
         console.log(countries);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
-  return (
+  return loading ? (
+    <div> Loading...</div>
+  ) : (
     <div>
-      {/* <SearchFilter darkMode={darkMode} /> */}
       <div className="flex justify-between sm:flex-col gap-8 px-12 sm:px-4 pt-10">
         <div
           className={
